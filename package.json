@@ -95,12 +95,9 @@
     "yq": "^0.0.1"
   },
   "dependencies": {
-    "@types/axios": "^0.14.0",
     "@types/cheerio": "^0.22.31",
     "@types/superagent": "^4.1.16",
-    "axios": "^1.3.3",
     "cheerio": "^1.0.0-rc.12",
-    "puppeteer": "^19.7.2",
     "superagent": "^8.0.9"
   }
 }

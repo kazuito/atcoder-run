@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+
 import getLoginCommand from "./command/login";
 import getLogoutCommand from "./command/logout";
 import getRunTestCommand from "./command/runTest/main";

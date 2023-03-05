@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import * as cp from "child_process";
-import { Readable, Writable } from "stream";
 import * as path from "path";
 import { Asset } from "../../types";
 import statusBarItem from "./statusBarItem";

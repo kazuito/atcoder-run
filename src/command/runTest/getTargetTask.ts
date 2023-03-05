@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import * as path from "path";
+
 import { Task } from "../../types";
 
 function getTargetTask(editor: vscode.TextEditor): Task | undefined {

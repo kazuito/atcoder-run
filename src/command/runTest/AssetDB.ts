@@ -2,8 +2,9 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 import * as cheerio from "cheerio";
-import { ContestData, Task, Asset } from "../../types";
 import * as superagent from "superagent";
+
+import { ContestData, Task, Asset } from "../../types";
 import statusBarItem from "./statusBarItem";
 
 export default class AssetDB {

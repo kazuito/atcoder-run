@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+
 import { TestResult } from "./execute";
 import statusBarItem from "./statusBarItem";
 
