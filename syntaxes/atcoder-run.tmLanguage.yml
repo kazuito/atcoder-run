@@ -1,0 +1,66 @@
+scopeName: "source.atcoder-run"
+patterns:
+  - include: "#expression"
+repository:
+  expression:
+    patterns:
+      - include: "#OkGroup"
+      - include: "#NgGroup"
+      - include: "#ResultGroup"
+      - include: "#CompileError"
+  OkGroup:
+    begin: "^(✔) (Test \\d+): (PASSED)"
+    end: ^(?=\r?\n)
+    beginCaptures:
+      1:
+        name: entity.name.type.class
+      2:
+        name: variable.other.constant
+      3:
+        name: entity.name.type.class
+    patterns:
+      - match: ^┃
+        name: entity.name.type.class
+      - match: (?<=^┃ -> ).*?(?=$)
+        name: variable.other.readwrite
+  NgGroup:
+    begin: "^(✖) (Test \\d+): (FAILED)"
+    end: ^(?=\r?\n)
+    beginCaptures:
+      1:
+        name: invalid.illegal
+      2:
+        name: variable.other.constant
+      3:
+        name: invalid.illegal
+    patterns:
+      - begin: (?<=^┃ Expected ->)\s
+        end: "^(?=┃ Actual)"
+        patterns:
+          - match: ^┃
+            name: invalid.illegal
+          - match: .
+            name: variable.other.readwrite
+      - begin: (?<=^┃ Actual   ->)\s
+        end: ^(?=\r?\n)
+        name: invalid.illegal
+      - match: ^┃
+        name: invalid.illegal
+  ResultGroup:
+    begin: ^-+$
+    end: ^(?=\r?\n|$)
+    patterns:
+      - match: "^.+?(?=:)"
+        name: keyword.control
+      - match: ACCEPTED
+        name: entity.name.type.class
+      - match: WRONG ANSWER
+        name: invalid.illegal
+      - match: ✔ [0-9]+
+        name: entity.name.type.class
+      - match: ✖ [0-9]+
+        name: invalid.illegal
+  CompileError:
+    begin: "✖ Compile Error:"
+    end: "^\n\n"
+    name: invalid.illegal

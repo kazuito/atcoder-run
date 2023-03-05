@@ -1,0 +1,12 @@
+out/
+dist/
+node_modules/
+.vscode-test/
+*.vsix
+
+# Generated file from .yaml
+syntaxes/*.json
+
+# Auto generated file on debug
+asset-db
+asset-db.json
