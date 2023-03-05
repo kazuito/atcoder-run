@@ -49,9 +49,7 @@ function getRunTestCommand(
 
       const config = vscode.workspace.getConfiguration("atcoder-run");
 
-      if (config.test.clearPreviousOutput === true) {
-        outputChannel.clear();
-      }
+      outputChannel.clear();
 
       let task = getTargetTask(editor);
 
@@ -95,7 +93,7 @@ function getRunTestCommand(
       );
 
       // On passed all tests, copy the code to clipboard automatically.
-      if (isAccepted && config.test.autoCopy) {
+      if (isAccepted && config.autoCopy) {
         copyToClipboard(
           editor.document.getText(),
           config.notifyOnAutoCopy ? "Copied the code to clipboard!" : undefined
