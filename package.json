@@ -6,9 +6,21 @@
   "engines": {
     "vscode": "^1.75.0"
   },
+  "publisher": "kazuito",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kazuito/atcoder-run.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kazuito/atcoder-run/issues"
+  },
+  "keywords": [
+    "atcoder"
+  ],
   "categories": [
     "Other"
   ],
+  "icon": "icon.png",
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
