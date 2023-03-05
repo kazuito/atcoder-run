@@ -8,6 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - No unreleased updates.
 
-## [0.0.1] - 2023-03-03
+## [0.0.1] - 2023-03-06
 
 - Initial release
