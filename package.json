@@ -1,7 +1,7 @@
 {
   "name": "atcoder-run",
-  "displayName": "atcoder-run",
-  "description": "",
+  "displayName": "AtCoder Run",
+  "description": "Enhance your AtCoder experience.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.75.0"
@@ -9,9 +9,7 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "*"
-  ],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -32,7 +30,7 @@
       }
     ],
     "configuration": {
-      "title": "atcoder-run",
+      "title": "AtCoder Run",
       "properties": {
         "atcoder-run.showInputForPassed": {
           "type": "boolean",
