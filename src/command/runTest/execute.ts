@@ -20,6 +20,8 @@ function compile(
   cmd: string,
   options: string[]
 ): Promise<{ msg: string } | undefined> {
+  statusBarItem.text = "$(sync~spin) Compiling...";
+
   return new Promise(async (resolve, reject) => {
     const child = cp.spawn(cmd, options);
 
@@ -63,8 +65,6 @@ async function execute(
   let cmd = "";
   let options: string[] = [];
   let compileError: { msg: string } | undefined;
-
-  statusBarItem.text = "$(sync~spin) Compiling...";
 
   switch (lang) {
     case "python": {

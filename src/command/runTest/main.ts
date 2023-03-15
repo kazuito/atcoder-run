@@ -86,6 +86,7 @@ function getRunTestCommand(
 
       let _results: TestResult[] = [];
       if (results) {
+        statusBarItem.text = "$(sync~spin) Test Running...";
         await (
           await Promise.all(results)
         ).forEach((result) => {
