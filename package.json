@@ -25,6 +25,33 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "AtCoderRun",
+          "title": "AtCoder Run",
+          "icon": "$(run)"
+        }
+      ]
+    },
+    "views": {
+      "AtCoderRun": [
+        {
+          "id": "atcoder-run.views.result",
+          "name": "Result",
+          "type": "webview"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "atcoder-run.runTest",
+          "when": "view == atcoder-run.views.result",
+          "group": "navigation"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "atcoder-run.login",
@@ -39,7 +66,8 @@
       {
         "command": "atcoder-run.runTest",
         "category": "AtCoder",
-        "title": "Run Test"
+        "title": "Run Test",
+        "icon": "$(run)"
       }
     ],
     "configuration": {
@@ -109,6 +137,7 @@
     "@types/cheerio": "^0.22.31",
     "@types/superagent": "^4.1.16",
     "cheerio": "^1.0.0-rc.12",
-    "superagent": "^8.0.9"
+    "superagent": "^8.0.9",
+    "vite-plugin-css-injected-by-js": "^3.0.1"
   }
 }

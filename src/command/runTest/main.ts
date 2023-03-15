@@ -1,19 +1,19 @@
 import * as vscode from "vscode";
 
 import { repoUrl } from "./../../statics";
-import drawResults from "./drawResults";
-import drawCompileError from "./drawCompileError";
 import getTargetTask from "./getTargetTask";
-import execute from "./execute";
+import execute, { TestResult } from "./execute";
 import AssetDB from "./AssetDB";
 import { copyToClipboard, openUrl } from "../../utils";
 import statusBarItem from "./statusBarItem";
+import { ResultWebviewViewProvider } from "../../extension";
 
 const supportedLangs = ["python", "c", "cpp", "go"];
 
 // "Run Test" Command
 function getRunTestCommand(
   context: vscode.ExtensionContext,
+  resultViewProvider: ResultWebviewViewProvider,
   outputChannel: vscode.OutputChannel
 ) {
   return async () => {
@@ -68,29 +68,40 @@ function getRunTestCommand(
         return;
       }
 
+      resultViewProvider.postMessage({
+        id: "task-info",
+        data: task,
+      });
+
       outputChannel.appendLine(
         `# ${task.contestId.toUpperCase()} - ${task.index.toUpperCase()}\n`
       );
-      outputChannel.show(true);
 
       const assetDB = new AssetDB(context);
       const assets = await assetDB.getAssets(task);
 
       let startTime = Date.now();
-      let { results, compileError } = await execute(context, assets, editor);
+      let { results, compileError } = await execute(assets, editor);
 
-      // On compile error
-      if (compileError) {
-        drawCompileError(outputChannel, compileError);
-        throw Error(undefined);
+      let _results: TestResult[] = [];
+      if (results) {
+        statusBarItem.text = "$(sync~spin) Test Running...";
+        await (
+          await Promise.all(results)
+        ).forEach((result) => {
+          _results.push(result);
+        });
       }
 
-      let isAccepted = await drawResults(
-        outputChannel,
-        results,
-        startTime,
-        config
-      );
+      resultViewProvider.postMessage({
+        id: "results",
+        data: {
+          results: _results,
+          compileError: compileError,
+        },
+      });
+
+      let isAccepted = false;
 
       // On passed all tests, copy the code to clipboard automatically.
       if (isAccepted && config.autoCopy) {

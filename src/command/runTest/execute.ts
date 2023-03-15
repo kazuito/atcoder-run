@@ -9,6 +9,7 @@ export type TestResult = {
   output: string;
   expected: string;
   isPassed: boolean;
+  time: number;
   error: {
     timedOut: boolean;
     msg?: string;
@@ -19,7 +20,9 @@ function compile(
   cmd: string,
   options: string[]
 ): Promise<{ msg: string } | undefined> {
-  return new Promise(async (resolve, reject) => {
+  statusBarItem.text = "$(sync~spin) Compiling...";
+
+  return new Promise(async (resolve) => {
     const child = cp.spawn(cmd, options);
 
     let errors: string[] = [];
@@ -29,7 +32,6 @@ function compile(
     });
 
     child.on("close", () => {
-
       if (errors.length === 0) {
         resolve(undefined);
       }
@@ -42,7 +44,6 @@ function compile(
 }
 
 async function execute(
-  context: vscode.ExtensionContext,
   assets: Asset[],
   editor: vscode.TextEditor
 ): Promise<{
@@ -63,8 +64,6 @@ async function execute(
   let cmd = "";
   let options: string[] = [];
   let compileError: { msg: string } | undefined;
-
-  statusBarItem.text = "$(sync~spin) Compiling...";
 
   switch (lang) {
     case "python": {
@@ -97,10 +96,13 @@ async function execute(
 
   let results = [];
 
+  const executionLimitTime = 3000;
+
   for (let asset of assets) {
     results.push(
-      new Promise<TestResult>(async (resolve, reject) => {
+      new Promise<TestResult>(async (resolve) => {
         const child = cp.spawn(cmd, options);
+        const startTime = Date.now();
 
         let errorMessages: string[] = [];
         let outputs: string[] = [];
@@ -113,12 +115,13 @@ async function execute(
             expected: asset.expected,
             output: genOutputStr(outputs),
             isPassed: false,
+            time: executionLimitTime,
             error: {
               timedOut: true,
               msg: genErrStr(errorMessages),
             },
           });
-        }, 3000);
+        }, executionLimitTime);
 
         // On Error
         child.stderr.on("data", (data: Buffer) => {
@@ -132,12 +135,12 @@ async function execute(
 
         // On Close
         child.on("close", (code: number) => {
-
           resolve({
             input: asset.input,
             expected: asset.expected,
             output: genOutputStr(outputs),
             isPassed: isPassed(outputs.join(""), asset.expected),
+            time: Date.now() - startTime,
             error: {
               timedOut: false,
               msg: genErrStr(errorMessages),

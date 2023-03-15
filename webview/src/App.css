@@ -1,0 +1,184 @@
+header h1 {
+  font-weight: normal;
+}
+
+button {
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border: none;
+  border-radius: 2px;
+  padding: 6px 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+code {
+  font-size: 14px;
+  color: var(--vscode-foreground);
+  font-family: var(--vscode-editor-font-family);
+  white-space: pre;
+  padding: 2px 6px;
+  line-height: 1.4;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  min-height: 19.6px;
+  border-radius: 3px;
+}
+code::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+}
+code::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 2px var(--vscode-panel-background);
+  border-radius: 999px;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.result-section {
+  position: relative;
+}
+.result-section::before {
+  content: "";
+  width: 3px;
+  height: calc(100% - 24px);
+  background: var(--border);
+  position: absolute;
+  top: 24px;
+  z-index: -1;
+  border-radius: 3px;
+}
+
+.result-section[data-passed="true"] {
+  --border: var(--vscode-inputValidation-infoBorder);
+  --bg: var(--vscode-inputValidation-infoBackground);
+}
+.result-section[data-passed="false"] {
+  --border: var(--vscode-inputValidation-errorBorder);
+  --bg: var(--vscode-inputValidation-errorBackground);
+}
+
+.result__heading {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  padding: 8px 0 0;
+  margin-left: -9.4px;
+  margin-bottom: -2px;
+}
+.result__heading > svg {
+  border: 3px solid var(--border);
+  border-radius: 999px;
+  background-color: var(--bg);
+  color: var(--vscode-inputOption-activeForeground);
+}
+.result__heading-text {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.result__heading-time-box {
+  display: flex;
+  color: var(--vscode-descriptionForeground);
+  align-items: center;
+  gap: 2px;
+}
+.result__heading-time {
+  line-height: 1.6;
+}
+.result__heading h2 {
+  margin: 0;
+  font-weight: normal;
+}
+.result__result-badge {
+  padding: 1px 8px;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 12px;
+  border: solid 1px var(--border);
+  background-color: var(--bg);
+}
+
+.result__body {
+  padding-left: 12px;
+  padding-top: 6px;
+}
+
+.result__passed-out {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.result__expected-container,
+.result__actual-container {
+  display: flex;
+  margin-top: 8px;
+  gap: 8px;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+.result__input-container code {
+  display: inline-block;
+  margin-top: 8px;
+  border: 1px solid var(--vscode-list-dropBackground);
+  color: var(--vscode-disabledForeground);
+  border-radius: 3px;
+}
+
+:is(.result__expected-container, .result__actual-container, .result__passed-out)
+  code {
+  color: var(--vscode-foreground);
+}
+:is(.result__passed-out, .result__expected-container) code {
+  background-color: var(--vscode-inputValidation-infoBackground);
+}
+:is(.result__passed-out, .result__expected-container)
+  code::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 2px var(--vscode-inputValidation-infoBackground);
+}
+.result__actual-container code {
+  background-color: var(--bg);
+}
+.result__passed-out svg {
+  color: var(--vscode-descriptionForeground);
+}
+
+.result__expected-text,
+.result__actual-text {
+  width: 50px;
+  font-size: 12px;
+  padding-top: 3px;
+  display: grid;
+  place-content: center;
+  color: var(--vscode-descriptionForeground);
+}
+
+.result__error-container {
+  margin-top: 12px;
+}
+
+.compile-error-section code,
+.result__error-container code {
+  display: inline-block;
+  background: var(--vscode-editorMarkerNavigationError-headerBackground);
+  color: var(--vscode-errorForeground);
+  padding: 4px 8px;
+}
+.result__error-container code::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 2px var(--vscode-inputValidation-errorBackground);
+}
+
+.compile-error-section h2 {
+  margin: 8px 0;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--vscode-editorError-foreground);
+}

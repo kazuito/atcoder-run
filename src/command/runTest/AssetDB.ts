@@ -143,7 +143,7 @@ export default class AssetDB {
    * Read the Asset DB file.
    */
   private async readDB() {
-    return new Promise<ContestData[]>((resolve, reject) => {
+    return new Promise<ContestData[]>((resolve) => {
       fs.readFile(this.dbPath, "utf8", (err, data) => {
         if (err) {
           resolve([]);
@@ -158,7 +158,7 @@ export default class AssetDB {
    * Write data to the Asset DB file.
    */
   private async writeDB(data: ContestData[]) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       fs.writeFile(this.dbPath, JSON.stringify(data), () => {
         resolve();
       });
