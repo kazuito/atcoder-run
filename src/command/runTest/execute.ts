@@ -22,7 +22,7 @@ function compile(
 ): Promise<{ msg: string } | undefined> {
   statusBarItem.text = "$(sync~spin) Compiling...";
 
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve) => {
     const child = cp.spawn(cmd, options);
 
     let errors: string[] = [];
@@ -44,7 +44,6 @@ function compile(
 }
 
 async function execute(
-  context: vscode.ExtensionContext,
   assets: Asset[],
   editor: vscode.TextEditor
 ): Promise<{
@@ -101,7 +100,7 @@ async function execute(
 
   for (let asset of assets) {
     results.push(
-      new Promise<TestResult>(async (resolve, reject) => {
+      new Promise<TestResult>(async (resolve) => {
         const child = cp.spawn(cmd, options);
         const startTime = Date.now();
 

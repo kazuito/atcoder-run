@@ -76,13 +76,12 @@ function getRunTestCommand(
       outputChannel.appendLine(
         `# ${task.contestId.toUpperCase()} - ${task.index.toUpperCase()}\n`
       );
-      // outputChannel.show(true);
 
       const assetDB = new AssetDB(context);
       const assets = await assetDB.getAssets(task);
 
       let startTime = Date.now();
-      let { results, compileError } = await execute(context, assets, editor);
+      let { results, compileError } = await execute(assets, editor);
 
       let _results: TestResult[] = [];
       if (results) {
