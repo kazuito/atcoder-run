@@ -69,11 +69,6 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-  const outputChannel = vscode.window.createOutputChannel(
-    "AtCoder",
-    "atcoder-run"
-  );
-
   const loginCommand = vscode.commands.registerCommand(
     "atcoder-run.login",
     getLoginCommand(context)
@@ -86,7 +81,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   const runTestCommand = vscode.commands.registerCommand(
     "atcoder-run.runTest",
-    getRunTestCommand(context, resultViewProvider, outputChannel)
+    getRunTestCommand(context, resultViewProvider)
   );
 
   context.subscriptions.push(loginCommand);

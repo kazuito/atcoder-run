@@ -13,8 +13,7 @@ const supportedLangs = ["python", "c", "cpp", "go"];
 // "Run Test" Command
 function getRunTestCommand(
   context: vscode.ExtensionContext,
-  resultViewProvider: ResultWebviewViewProvider,
-  outputChannel: vscode.OutputChannel
+  resultViewProvider: ResultWebviewViewProvider
 ) {
   return async () => {
     statusBarItem.show();
@@ -49,8 +48,6 @@ function getRunTestCommand(
 
       const config = vscode.workspace.getConfiguration("atcoder-run");
 
-      outputChannel.clear();
-
       let task = getTargetTask(editor);
 
       // On task specifier not found
@@ -73,14 +70,9 @@ function getRunTestCommand(
         data: task,
       });
 
-      outputChannel.appendLine(
-        `# ${task.contestId.toUpperCase()} - ${task.index.toUpperCase()}\n`
-      );
-
       const assetDB = new AssetDB(context);
       const assets = await assetDB.getAssets(task);
 
-      let startTime = Date.now();
       let { results, compileError } = await execute(assets, editor);
 
       let _results: TestResult[] = [];

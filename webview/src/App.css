@@ -15,7 +15,6 @@ button {
 code {
   font-size: 14px;
   color: var(--vscode-foreground);
-  font-family: var(--vscode-editor-font-family);
   white-space: pre;
   padding: 2px 6px;
   line-height: 1.4;

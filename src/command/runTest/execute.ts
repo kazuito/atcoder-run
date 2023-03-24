@@ -67,7 +67,7 @@ async function execute(
 
   switch (lang) {
     case "python": {
-      cmd = "python";
+      cmd = "python3";
       options = [filePath];
       break;
     }
