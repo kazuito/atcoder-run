@@ -5,6 +5,7 @@ import getLogoutCommand from "./command/logout";
 import getRunTestCommand from "./command/runTest/main";
 
 export class ResultWebviewViewProvider implements vscode.WebviewViewProvider {
+  public webviewView!: vscode.WebviewView;
   public webview!: vscode.Webview;
   constructor(public context: vscode.ExtensionContext) {}
 
@@ -13,6 +14,7 @@ export class ResultWebviewViewProvider implements vscode.WebviewViewProvider {
     context: vscode.WebviewViewResolveContext<unknown>,
     token: vscode.CancellationToken
   ): void | Thenable<void> {
+    this.webviewView = webviewView;
     this.webview = webviewView.webview;
 
     webviewView.webview.options = {
@@ -52,6 +54,10 @@ export class ResultWebviewViewProvider implements vscode.WebviewViewProvider {
         }
       }
     });
+  }
+
+  public reveal() {
+    this.webviewView.show();
   }
 
   public postMessage(msg: any) {

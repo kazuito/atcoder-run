@@ -17,6 +17,8 @@ function getRunTestCommand(
 ) {
   return async () => {
     statusBarItem.show();
+    resultViewProvider.reveal();
+
     try {
       const editor = vscode.window.activeTextEditor;
 
