@@ -1,3 +1,7 @@
+#root {
+  padding-bottom: 24px;
+}
+
 header h1 {
   font-weight: normal;
 }
