@@ -4,7 +4,9 @@ All notable changes to the "AtCoder Run" extension will be documented in this fi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+<!-- ## [Unreleased] -->
+
+## [0.0.2] - 2023-03-28
 
 ### Changed
 
