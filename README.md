@@ -9,7 +9,7 @@ Works with `Python`, `C`, `C++` and `Go`.
 - ### Run Test
 
   Fetch samples of the task and execute the tests automatically.
-  Then quickly view the results in the Output tab.
+  Then quickly view the results in the result tab.
   
 ## Commands
 
@@ -26,6 +26,7 @@ To run the test, you need to specify the Contest ID (abc266, arc032 ...) and Tas
 - **Specify with Comment**
 
   OK
+
   ```cpp
   // abc123 a
   // ABC123 A
@@ -35,15 +36,19 @@ To run the test, you need to specify the Contest ID (abc266, arc032 ...) and Tas
   // sample2023-final a
   // sample2023-final-a
   ```
+
   NG
+
   ```cpp
   // abc 123 a
   // abc123 : a
   // AtCoder Beginner Contest 123 a
   // sample2023 final a
   ```
+  
 - **Specify with File Structure**
-  ```
+
+  ```txt
   abc
    |- 123         
    |   |- a.cpp
@@ -55,8 +60,6 @@ To run the test, you need to specify the Contest ID (abc266, arc032 ...) and Tas
        |- b.cpp
        |  ...
   ```
-
-
 
 ## Why is login information required?
 
