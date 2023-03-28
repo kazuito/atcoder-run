@@ -95,7 +95,11 @@ function getRunTestCommand(
         },
       });
 
-      let isAccepted = false;
+      console.log(_results);
+      let isAccepted =
+        _results.every((r) => {
+          return r.isPassed;
+        }) && !compileError;
 
       // On passed all tests, copy the code to clipboard automatically.
       if (isAccepted && config.autoCopy) {
