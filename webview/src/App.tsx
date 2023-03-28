@@ -13,7 +13,7 @@ function Result(props: { result: any; i: number }) {
       <div className="result__heading">
         {isPassed ? <BiCheck size={16} /> : <BiX size={16} />}
         <div className="result__heading-text">
-          <h2>Test {props.i}</h2>
+          <h2>Test {props.i + 1}</h2>
           <div className="result__heading-time-box">
             <IoIosTimer size={12} />
             <div className="result__heading-time">
