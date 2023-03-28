@@ -2,7 +2,7 @@
   "name": "atcoder-run",
   "displayName": "AtCoder Run",
   "description": "Enhance your AtCoder experience.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.75.0"
   },
